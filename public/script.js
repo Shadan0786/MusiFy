@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = document.createElement("li");
     li.dataset.artist = artistName;
     li.className =
-      "flex justify-between items-center px-3 py-2 bg-gray-800 rounded hover:bg-gray-700 cursor-pointer group";
+      "flex justify-between items-center px-3 py-2 mb-2 rounded hover:bg-gray-700 cursor-pointer group";
 
     const span = document.createElement("span");
     span.textContent = artistName;
