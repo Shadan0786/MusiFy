@@ -187,3 +187,29 @@ document.addEventListener("DOMContentLoaded", () => {
     li.replaceWith(newLi);
   });
 });
+
+
+document.getElementById("signupBtn").addEventListener("click", async () => {
+  const name = prompt("Enter name:");
+  const email = prompt("Enter email:");
+  const password = prompt("Enter password:");
+  const res = await fetch("/api/auth/signup", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, email, password })
+  });
+  const data = await res.json();
+  alert(data.msg);
+});
+
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const email = prompt("Enter email:");
+  const password = prompt("Enter password:");
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ email, password })
+  });
+  const data = await res.json();
+  alert(data.msg);
+});

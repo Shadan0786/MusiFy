@@ -2,17 +2,32 @@ import express from "express";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
 
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// ✅ Middleware
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public"))); // Serve your frontend
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public"))); // Serve frontend
+
+// ✅ MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log("❌ MongoDB Error:", err.message));
+
+// ✅ Routes
+app.use("/api/auth", authRoutes);
 
 // ✅ Fetch songs by artist
 app.get("/songs/:artist", (req, res) => {
@@ -32,16 +47,14 @@ app.get("/songs/:artist", (req, res) => {
   });
 });
 
-// Serve actual audio files
+// ✅ Serve actual audio files
 app.get("/songs/:artist/:song", (req, res) => {
   const { artist, song } = req.params;
   const songPath = path.join(__dirname, "songs", artist, song);
   res.sendFile(songPath);
 });
 
-
+// ✅ Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
-
-
