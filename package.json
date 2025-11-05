@@ -18,6 +18,16 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.2"
-  }
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "mongoose": "^8.19.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shadan0786/MusiFy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shadan0786/MusiFy/issues"
+  },
+  "homepage": "https://github.com/Shadan0786/MusiFy#readme"
 }
